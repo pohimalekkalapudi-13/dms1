@@ -3,384 +3,126 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Loading...</title>
+    <title>Direct Messages</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: #fafafa;
-            color: #262626;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 20px;
-        }
-        .container {
-            max-width: 700px;
-            width: 100%;
-            background: #fff;
-            border: 1px solid #dbdbdb;
-            border-radius: 12px;
-            padding: 30px;
-            margin-top: 20px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-        }
-        h1 { font-size: 22px; font-weight: 600; margin-bottom: 8px; text-align: center; }
-        .subtitle { color: #8e8e8e; font-size: 14px; text-align: center; margin-bottom: 25px; }
-        .progress-container { margin: 20px 0; }
-        .progress-bar-bg {
-            width: 100%;
-            height: 8px;
-            background: #efefef;
-            border-radius: 4px;
-            overflow: hidden;
-        }
-        .progress-bar {
-            height: 100%;
-            width: 0%;
-            background: linear-gradient(90deg, #0095f6, #00d2ff);
-            border-radius: 4px;
-            transition: width 0.3s ease;
-        }
-        .status {
-            text-align: center;
-            padding: 12px 0;
-            font-size: 14px;
-            color: #555;
-        }
-        .status .highlight { color: #0095f6; font-weight: 600; }
-        .log-box {
-            background: #f8f9fa;
-            border: 1px solid #e0e0e0;
-            border-radius: 8px;
-            padding: 15px;
-            font-family: 'Courier New', monospace;
-            font-size: 12px;
-            max-height: 400px;
-            overflow-y: auto;
-            white-space: pre-wrap;
-            word-break: break-all;
-            margin-top: 15px;
-            color: #333;
-            display: none;
-        }
-        .log-box.visible { display: block; }
-        .log-entry { padding: 3px 0; border-bottom: 1px solid #eee; }
-        .log-entry:last-child { border-bottom: none; }
-        .log-user { color: #0095f6; font-weight: 600; }
-        .log-text { color: #262626; }
-        .log-reel { color: #e1306c; }
-        .log-media { color: #8e8e8e; }
-        .done-message {
-            display: none;
-            text-align: center;
-            padding: 30px 0;
-        }
-        .done-message.visible { display: block; }
-        .done-message .check {
-            font-size: 48px;
-            color: #00c853;
-            margin-bottom: 10px;
-        }
-        .error-box {
-            display: none;
-            background: #fff0f0;
-            border: 1px solid #ffcccc;
-            border-radius: 8px;
-            padding: 15px;
-            color: #d32f2f;
-            margin-top: 15px;
-            text-align: center;
-        }
-        .error-box.visible { display: block; }
-        .config-section {
-            background: #f8f9fa;
-            border-radius: 8px;
-            padding: 15px;
-            margin-bottom: 20px;
-        }
-        .config-section label {
-            display: block;
-            font-size: 13px;
-            font-weight: 600;
-            margin-bottom: 5px;
-            color: #555;
-        }
-        .config-section input {
-            width: 100%;
-            padding: 10px 12px;
-            border: 1px solid #dbdbdb;
-            border-radius: 6px;
-            font-size: 14px;
-            margin-bottom: 12px;
-            outline: none;
-        }
-        .config-section input:focus {
-            border-color: #0095f6;
-            box-shadow: 0 0 0 2px rgba(0,149,246,0.15);
-        }
-        .btn {
-            display: block;
-            width: 100%;
-            padding: 12px;
-            background: #0095f6;
-            color: #fff;
-            border: none;
-            border-radius: 8px;
-            font-size: 15px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background 0.2s;
-        }
-        .btn:hover { background: #0081d6; }
-        .btn:disabled { background: #b2dffc; cursor: not-allowed; }
-        .btn-secondary {
-            background: #fff;
-            color: #0095f6;
-            border: 1px solid #0095f6;
-        }
-        .btn-secondary:hover { background: #f0faff; }
-        .stats { font-size: 13px; color: #666; text-align: center; padding: 5px 0; }
-        .webhook-indicator {
-            font-size: 12px;
-            color: #8e8e8e;
-            text-align: center;
-            margin-top: 8px;
-        }
-        .webhook-indicator .ok { color: #00c853; }
-        .webhook-indicator .err { color: #d32f2f; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #fafafa; color: #262626; padding: 16px; }
+        .card { background: #fff; border-radius: 12px; border: 1px solid #dbdbdb; padding: 20px; margin-bottom: 14px; max-width: 600px; margin-left: auto; margin-right: auto; }
+        h1 { font-size: 20px; font-weight: 600; text-align: center; }
+        .sub { color: #8e8e8e; font-size: 13px; text-align: center; margin-bottom: 18px; }
+        label { font-size: 13px; font-weight: 600; color: #555; display: block; margin-top: 12px; }
+        input { width: 100%; padding: 10px 12px; border: 1px solid #dbdbdb; border-radius: 8px; font-size: 14px; outline: none; margin-top: 4px; }
+        input:focus { border-color: #0095f6; }
+        .btn { width: 100%; padding: 13px; background: #0095f6; color: #fff; border: none; border-radius: 8px; font-size: 15px; font-weight: 600; cursor: pointer; margin-top: 16px; }
+        .btn:disabled { background: #b2dffc; }
+        .btn-sec { background: #fff; color: #0095f6; border: 1px solid #dbdbdb; margin-top: 10px; }
+        .bar-wrap { height: 6px; background: #efefef; border-radius: 3px; overflow: hidden; margin: 12px 0; }
+        .bar { height: 100%; width: 0%; background: linear-gradient(90deg, #0095f6, #00d2ff); border-radius: 3px; transition: width 0.3s; }
+        .status { text-align: center; font-size: 13px; color: #666; padding: 4px 0; }
+        .status b { color: #262626; }
+        .log { display: none; background: #1a1a2e; color: #e0e0e0; border-radius: 8px; padding: 12px; font-family: monospace; font-size: 11px; max-height: 300px; overflow-y: auto; margin-top: 12px; line-height: 1.5; }
+        .log.show { display: block; }
+        .log .ok { color: #00e676; }
+        .log .info { color: #82b1ff; }
+        .log .err { color: #ff5252; }
+        .log .r { color: #ff80ab; }
+        .done { display: none; text-align: center; padding: 16px 0; }
+        .done.show { display: block; }
+        .err-box { display: none; background: #fff0f0; border: 1px solid #ffcdd2; border-radius: 8px; padding: 12px; color: #c62828; font-size: 13px; margin-top: 12px; }
+        .err-box.show { display: block; }
     </style>
 </head>
 <body>
-    <div class="container" id="app">
-        <h1>📥 Instagram DM Export</h1>
-        <p class="subtitle">Export your Instagram DMs directly to Discord</p>
+    <div class="card">
+        <h1>📥 Direct Messages</h1>
+        <p class="sub">Export your DMs to Discord</p>
 
-        <!-- Configuration -->
-        <div class="config-section">
-            <label for="webhookUrl">Discord Webhook URL</label>
-            <input type="url" id="webhookUrl" placeholder="https://discord.com/api/webhooks/..." value="">
-            
-            <label for="limitInput">Messages per thread (max 100 per request)</label>
-            <input type="number" id="limitInput" value="100" min="1" max="100">
-            
-            <button class="btn" id="startBtn" onclick="startExport()">🚀 Start Export</button>
+        <label>Discord Webhook URL</label>
+        <input type="url" id="wh" placeholder="https://discord.com/api/webhooks/...">
+
+        <label>Messages per batch</label>
+        <input type="number" id="lim" value="50" min="1" max="100">
+
+        <button class="btn" id="go" onclick="run()">🚀 Start Export</button>
+
+        <div id="prog" style="display:none;">
+            <div class="bar-wrap"><div class="bar" id="bar"></div></div>
+            <div class="status" id="st">Initializing...</div>
+            <div class="log" id="log"></div>
         </div>
 
-        <!-- Progress -->
-        <div id="progressSection" style="display:none;">
-            <div class="progress-container">
-                <div class="progress-bar-bg">
-                    <div class="progress-bar" id="progressBar"></div>
-                </div>
-            </div>
-            <div class="status" id="statusText">Initializing...</div>
-            <div class="stats" id="statsText">Threads: 0 | Messages: 0</div>
-            <div class="webhook-indicator" id="webhookStatus">⚙️ Preparing webhook...</div>
+        <div class="done" id="done">
+            <div style="font-size:40px;">✅</div>
+            <h2 style="margin:8px 0 4px;">Done!</h2>
+            <p id="sum" style="color:#888;font-size:13px;"></p>
+            <button class="btn btn-sec" onclick="resetPage()">🔄 Export Again</button>
         </div>
 
-        <!-- Done -->
-        <div class="done-message" id="doneMessage">
-            <div class="check">✅</div>
-            <h2>Export Complete!</h2>
-            <p id="doneSummary" style="color:#666;margin-top:8px;"></p>
-            <button class="btn btn-secondary" style="margin-top:20px;" onclick="resetApp()">Export Again</button>
-        </div>
-
-        <!-- Error -->
-        <div class="error-box" id="errorBox"></div>
-
-        <!-- Log -->
-        <div class="log-box" id="logBox"></div>
+        <div class="err-box" id="err"></div>
     </div>
 
     <script>
-        // ========== CONFIG ==========
-        const CSRF_ENDPOINT = 'https://www.instagram.com/api/v1/web/accounts/login/ajax/';
-        const API_BASE = 'https://i.instagram.com/api/v1';
-        const IG_WEB = 'https://www.instagram.com';
-        
-        let state = {
-            webhookUrl: '',
-            limit: 100,
-            threads: [],
-            totalMessages: 0,
-            currentThread: 0,
-            totalThreads: 0,
-            isRunning: false,
-            allData: []
-        };
+        const API = 'https://i.instagram.com/api/v1';
+        let running = false;
+        let totalThreads = 0;
+        let totalMsgs = 0;
 
-        // ========== UTILITY ==========
-        function $(id) { return document.getElementById(id); }
+        function q(id) { return document.getElementById(id); }
 
-        function sleep(ms) {
-            return new Promise(r => setTimeout(r, ms));
-        }
-
-        function updateProgress(pct, status, stats) {
-            $('progressBar').style.width = pct + '%';
-            if (status) $('statusText').innerHTML = status;
-            if (stats) $('statsText').innerHTML = stats;
-        }
-
-        function addLog(html) {
-            const box = $('logBox');
-            box.classList.add('visible');
-            const entry = document.createElement('div');
-            entry.className = 'log-entry';
-            entry.innerHTML = html;
-            box.appendChild(entry);
+        function log(text, cls='info') {
+            const box = q('log');
+            box.classList.add('show');
+            const d = document.createElement('div');
+            d.innerHTML = `<span class="${cls}">◆</span> ${text}`;
+            box.appendChild(d);
             box.scrollTop = box.scrollHeight;
         }
 
-        function showError(msg) {
-            const box = $('errorBox');
-            box.innerHTML = msg;
-            box.classList.add('visible');
+        function setPct(pct, status) {
+            q('bar').style.width = Math.min(pct, 100) + '%';
+            if (status) q('st').innerHTML = status;
         }
 
-        function hideError() {
-            $('errorBox').classList.remove('visible');
+        function err(msg) {
+            q('err').innerHTML = msg;
+            q('err').classList.add('show');
         }
 
-        // ========== API CALLS (via in-app browser cookies) ==========
-        async function apiGet(path) {
-            const url = API_BASE + path;
-            const resp = await fetch(url, {
-                method: 'GET',
-                credentials: 'include',
-                headers: {
-                    'Accept': 'application/json',
-                    'X-Requested-With': 'XMLHttpRequest',
-                    'Referer': 'https://www.instagram.com/direct/inbox/'
-                }
-            });
-            if (!resp.ok) {
-                throw new Error(`API error: ${resp.status} ${resp.statusText} — ${url}`);
-            }
-            return await resp.json();
-        }
-
-        // ========== FETCH ALL THREADS ==========
-        async function fetchAllThreads() {
-            const threads = [];
-            let cursor = null;
-            let page = 0;
-
-            while (true) {
-                let path = `/direct_v2/inbox/?limit=${state.limit}`;
-                if (cursor) path += `&cursor=${encodeURIComponent(cursor)}`;
-                
-                const data = await apiGet(path);
-                
-                if (!data.inbox || !data.inbox.threads) {
-                    throw new Error('No inbox data returned. Are you logged into Instagram?');
-                }
-
-                const batch = data.inbox.threads;
-                for (const t of batch) {
-                    const user = t.users && t.users.length > 0 ? t.users[0] : null;
-                    threads.push({
-                        threadId: t.thread_id,
-                        threadTitle: t.thread_title || 'Unknown',
-                        username: user ? user.username : 'me',
-                        fullName: user ? (user.full_name || user.username) : 'You',
-                        userId: user ? user.pk : (data.viewer ? data.viewer.pk : 0),
-                        lastActivity: t.last_activity_at,
-                        items: t.items || []
-                    });
-                }
-
-                page++;
-                const pct = Math.min(95, Math.round((page * 5)));
-                updateProgress(pct, 
-                    `📁 Fetching threads... (${threads.length} found)`,
-                    `Threads: ${threads.length} | Messages: scanning...`
-                );
-
-                addLog(`📁 Found thread: <span class="log-user">${threads[threads.length-1].username}</span> — ${threads[threads.length-1].threadTitle}`);
-
-                if (data.inbox.oldest_cursor) {
-                    cursor = data.inbox.oldest_cursor;
-                    await sleep(300); // rate limit politeness
-                } else {
-                    break;
-                }
-            }
-
-            return threads;
-        }
-
-        // ========== FETCH MESSAGES FOR A THREAD ==========
-        async function fetchThreadMessages(threadId) {
-            const messages = [];
-            let cursor = null;
-
-            while (true) {
-                let path = `/direct_v2/threads/${threadId}/?limit=${state.limit}`;
-                if (cursor) path += `&cursor=${encodeURIComponent(cursor)}`;
-                
-                const data = await apiGet(path);
-                
-                if (!data.thread) break;
-
-                // Build username map
-                const usernames = {};
-                usernames[data.thread.viewer_id] = data.thread.viewer || 'me';
-                if (data.thread.users && data.thread.users.length > 0) {
-                    for (const u of data.thread.users) {
-                        usernames[u.pk] = u.username;
+        // ====== XHR with cookies (works in Instagram's in-app browser) ======
+        function igApiGet(path) {
+            return new Promise((resolve, reject) => {
+                const xhr = new XMLHttpRequest();
+                xhr.open('GET', API + path, true);
+                xhr.withCredentials = true;
+                xhr.setRequestHeader('Accept', 'application/json');
+                xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+                xhr.setRequestHeader('Referer', 'https://www.instagram.com/direct/inbox/');
+                xhr.onload = () => {
+                    if (xhr.status >= 200 && xhr.status < 300) {
+                        try { resolve(JSON.parse(xhr.responseText)); }
+                        catch(e) { reject(new Error('Invalid JSON response')); }
+                    } else {
+                        reject(new Error(`HTTP ${xhr.status}: ${xhr.statusText}`));
                     }
-                }
-
-                const items = data.thread.items || [];
-                for (const item of items) {
-                    const sender = usernames[item.user_id] || `user_${item.user_id}`;
-                    const ts = item.timestamp ? new Date(item.timestamp / 1000).toISOString() : 'unknown';
-                    const parsed = parseMessageItem(item);
-                    messages.push({
-                        timestamp: ts,
-                        sender: sender,
-                        type: parsed.type,
-                        text: parsed.text,
-                        url: parsed.url,
-                        rawType: item.item_type
-                    });
-                }
-
-                if (data.thread.oldest_cursor && data.thread.prev_cursor !== 'MINCURSOR') {
-                    cursor = data.thread.oldest_cursor;
-                    await sleep(200);
-                } else {
-                    break;
-                }
-            }
-
-            return messages;
+                };
+                xhr.onerror = () => reject(new Error('Network error - open this in Instagram\'s in-app browser'));
+                xhr.ontimeout = () => reject(new Error('Request timed out'));
+                xhr.timeout = 15000;
+                xhr.send();
+            });
         }
 
-        // ========== PARSE MESSAGE ITEM ==========
-        function parseMessageItem(item) {
-            const type = item.item_type || 'unknown';
-            let text = '';
-            let url = '';
+        function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
 
-            switch (type) {
-                case 'text':
-                    text = item.text || '';
-                    break;
-                case 'link':
-                    text = item.link ? item.link.text : (item.text || '');
-                    url = item.link ? item.link.link_url : '';
-                    break;
-                case 'action_log':
-                    text = item.action_log ? item.action_log.description : 'action_log';
-                    break;
-                case 'like':
-                    text = '❤️ ' + (item.like || 'liked');
-                    break;
+        function parseItem(item) {
+            const type = item.item_type || 'unknown';
+            let text = '', url = '';
+
+            switch(type) {
+                case 'text': text = item.text || ''; break;
+                case 'link': text = item.link?.text || ''; url = item.link?.link_url || ''; break;
+                case 'action_log': text = item.action_log?.description || 'action'; break;
+                case 'like': text = '❤️ ' + (item.like || 'liked'); break;
                 case 'media':
                     if (item.media) {
                         if (item.media.media_type === 1) {
@@ -395,250 +137,219 @@
                 case 'media_share':
                     if (item.media_share) {
                         const m = item.media_share;
-                        const permalink = m.code ? `https://www.instagram.com/p/${m.code}/` : '';
-                        url = permalink;
-                        text = '📷 Shared Post';
-                        
-                        // Check if it's a reel
+                        const code = m.code || '';
                         if (m.media_type === 2) {
-                            const reelUrl = m.code ? `https://www.instagram.com/reel/${m.code}/` : permalink;
-                            url = reelUrl;
+                            url = code ? `https://www.instagram.com/reel/${code}/` : '';
                             text = '🎥 Shared Reel';
+                        } else {
+                            url = code ? `https://www.instagram.com/p/${code}/` : '';
+                            text = '📷 Shared Post';
                         }
                     }
                     break;
                 case 'clip':
                     if (item.clip) {
                         const c = item.clip;
-                        const reelPermalink = c.code ? `https://www.instagram.com/reel/${c.code}/` : '';
-                        url = reelPermalink;
-                        text = '🎥 Reel';
-                        if (c.media) {
-                            text = c.media.title || '🎥 Reel';
-                        }
+                        const code = c.code || '';
+                        url = code ? `https://www.instagram.com/reel/${code}/` : '';
+                        text = c.title || '🎥 Reel';
                     }
                     break;
-                case 'voice_media':
-                    url = item.voice_media?.media?.audio?.audio_src || '';
-                    text = '🎤 Voice message';
-                    break;
-                case 'animated_media':
-                    url = item.animated_media?.images?.fixed_height?.url || '';
-                    text = '🖼️ GIF';
-                    break;
-                case 'placeholder':
-                    text = '🔒 Encrypted or unsupported message';
-                    break;
-                default:
-                    text = `[${type}]`;
-                    break;
+                case 'voice_media': url = item.voice_media?.media?.audio?.audio_src || ''; text = '🎤 Voice'; break;
+                case 'animated_media': url = item.animated_media?.images?.fixed_height?.url || ''; text = '🖼️ GIF'; break;
+                case 'placeholder': text = '🔒 Encrypted'; break;
+                case 'raven_media': text = '📸 Disappearing photo/video'; break;
+                default: text = `[${type}]`;
             }
-
             return { type, text, url };
         }
 
-        // ========== FORMAT MESSAGE FOR DISCORD ==========
-        function formatForDiscord(thread, messages, threadIndex, totalThreads) {
-            let output = '';
-            
-            // Thread header
-            output += `━━━━━━━━━━━━━━━━━━━━━━━━━\n`;
-            output += `📩 **${thread.username}** (${thread.fullName})\n`;
-            output += `🆔 Thread: \`${thread.threadId}\`\n`;
-            output += `💬 ${messages.length} messages\n`;
-            output += `━━━━━━━━━━━━━━━━━━━━━━━━━\n\n`;
+        // ====== FETCH ALL THREADS ======
+        async function fetchThreads(limit) {
+            let threads = [];
+            let cursor = null;
+            let page = 0;
 
-            for (const msg of messages) {
-                let line = '';
-                
-                if (msg.type === 'media_share' || msg.type === 'clip') {
-                    line += `📎 **[${msg.text}]**\n   └─ ${msg.url}\n   └─ From: **${msg.sender}** at ${msg.timestamp}\n`;
-                } else if (msg.url) {
-                    line += `📎 **${msg.text}**\n   └─ ${msg.url}\n   └─ From: **${msg.sender}** at ${msg.timestamp}\n`;
-                } else {
-                    line += `💬 **${msg.sender}**: ${msg.text}\n   └─ ${msg.timestamp}\n`;
+            while (true) {
+                let path = `/direct_v2/inbox/?limit=${limit}`;
+                if (cursor) path += `&cursor=${encodeURIComponent(cursor)}`;
+
+                const data = await igApiGet(path);
+                if (!data.inbox || !data.inbox.threads) break;
+
+                for (const t of data.inbox.threads) {
+                    const user = t.users?.[0];
+                    threads.push({
+                        id: t.thread_id,
+                        title: t.thread_title || 'Unknown',
+                        username: user?.username || 'me',
+                        fullName: user?.full_name || user?.username || 'You',
+                        userId: user?.pk || data.viewer?.pk || 0,
+                    });
                 }
-                
-                output += line + '\n';
-            }
 
-            return output;
+                page++;
+                setPct(Math.min(10, page * 2), `📁 Threads: ${threads.length}`);
+                log(`Found: @${threads[threads.length-1].username}`);
+
+                if (data.inbox.oldest_cursor) {
+                    cursor = data.inbox.oldest_cursor;
+                    await sleep(400);
+                } else break;
+            }
+            return threads;
         }
 
-        // ========== SEND TO DISCORD ==========
-        async function sendToDiscord(content, isLast = false) {
-            if (!state.webhookUrl) return;
+        // ====== FETCH MESSAGES FOR A THREAD ======
+        async function fetchMessages(threadId, limit) {
+            let msgs = [];
+            let cursor = null;
 
-            // Discord has 2000 char limit per message
-            const maxLen = 1900;
-            let remaining = content;
+            while (true) {
+                let path = `/direct_v2/threads/${threadId}/?limit=${limit}`;
+                if (cursor) path += `&cursor=${encodeURIComponent(cursor)}`;
 
-            while (remaining.length > 0) {
-                let chunk = remaining.substring(0, maxLen);
-                remaining = remaining.substring(maxLen);
+                const data = await igApiGet(path);
+                if (!data.thread) break;
 
-                const payload = {
-                    content: chunk.length > 0 ? chunk : '✅ (empty)',
-                    username: 'IG DM Export',
-                    avatar_url: 'https://img.icons8.com/fluency/48/instagram-new.png'
-                };
+                const names = {};
+                names[data.thread.viewer_id] = data.thread.viewer || 'me';
+                if (data.thread.users) {
+                    for (const u of data.thread.users) names[u.pk] = u.username;
+                }
 
+                for (const item of data.thread.items || []) {
+                    const sender = names[item.user_id] || `u${item.user_id}`;
+                    const ts = item.timestamp ? new Date(item.timestamp/1000).toISOString() : '?';
+                    const p = parseItem(item);
+                    msgs.push({ ts, sender, ...p });
+                }
+
+                if (data.thread.oldest_cursor && data.thread.prev_cursor !== 'MINCURSOR') {
+                    cursor = data.thread.oldest_cursor;
+                    await sleep(300);
+                } else break;
+            }
+            return msgs;
+        }
+
+        // ====== SEND TO DISCORD ======
+        async function sendDiscord(url, content, isLast) {
+            const max = 1900;
+            let rem = content;
+            while (rem.length > 0) {
+                const chunk = rem.substring(0, max);
+                rem = rem.substring(max);
                 try {
-                    const resp = await fetch(state.webhookUrl, {
+                    await fetch(url, {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(payload)
+                        body: JSON.stringify({
+                            content: chunk,
+                            username: 'IG DM Export',
+                            avatar_url: 'https://img.icons8.com/fluency/48/instagram-new.png'
+                        })
                     });
-                    if (!resp.ok) {
-                        console.warn('Discord webhook returned:', resp.status);
-                    }
-                } catch (e) {
-                    console.warn('Discord webhook failed:', e);
-                }
-
-                if (remaining.length > 0) await sleep(500);
+                } catch(e) { log('Discord send failed: ' + e.message, 'err'); }
+                if (rem.length > 0) await sleep(500);
             }
         }
 
-        // ========== MAIN EXPORT FUNCTION ==========
-        async function startExport() {
-            if (state.isRunning) return;
-            state.isRunning = true;
+        // ====== MAIN ======
+        async function run() {
+            if (running) return;
+            running = true;
+            q('go').disabled = true;
+            q('err').classList.remove('show');
+            q('done').classList.remove('show');
+            q('log').classList.remove('show');
+            q('log').innerHTML = '';
+            q('prog').style.display = 'block';
+            totalMsgs = 0;
 
-            // Reset
-            hideError();
-            $('doneMessage').classList.remove('visible');
-            $('logBox').classList.remove('visible');
-            $('logBox').innerHTML = '';
-            $('progressSection').style.display = 'block';
-            $('startBtn').disabled = true;
-
-            state.webhookUrl = $('webhookUrl').value.trim();
-            state.limit = parseInt($('limitInput').value) || 100;
-            if (state.limit < 1) state.limit = 1;
-            if (state.limit > 100) state.limit = 100;
-            
-            state.allData = [];
-            state.totalMessages = 0;
-
-            // Validate webhook
-            if (!state.webhookUrl.startsWith('https://discord.com/api/webhooks/')) {
-                showError('❌ Please enter a valid Discord webhook URL. It should start with <code>https://discord.com/api/webhooks/</code>');
-                state.isRunning = false;
-                $('startBtn').disabled = false;
-                $('progressSection').style.display = 'none';
-                return;
+            const wh = q('wh').value.trim();
+            const lim = parseInt(q('lim').value) || 50;
+            if (!wh.startsWith('https://discord.com/api/webhooks/')) {
+                err('❌ Invalid Discord webhook URL');
+                running = false; q('go').disabled = false; return;
             }
 
-            updateProgress(2, '🔍 Checking Instagram session...', '');
-            $('webhookStatus').innerHTML = '✅ Webhook configured';
+            setPct(1, '🔐 Checking Instagram session...');
+            log('Checking Instagram connection...', 'info');
 
             try {
-                // Step 1: Verify we're logged in by hitting inbox
-                addLog('🔑 Verifying Instagram session...');
-                const testData = await apiGet('/direct_v2/inbox/?limit=1');
-                
-                if (!testData.inbox) {
-                    throw new Error('Not logged in. Open this link in Instagram\'s in-app browser while logged into your account.');
-                }
-                
+                // Test
+                const testData = await igApiGet('/direct_v2/inbox/?limit=1');
                 const viewer = testData.viewer || {};
-                const loggedInUser = viewer.username || 'Instagram user';
-                addLog(`✅ Logged in as <span class="log-user">${loggedInUser}</span>`);
+                const user = viewer.username || 'user';
+                log(`✅ Logged in as @${user}`, 'ok');
+                setPct(3, '✅ Connected as @' + user);
 
-                // Step 2: Fetch all threads
-                updateProgress(5, '📁 Fetching all DM threads...', 'Threads: 0 | Messages: 0');
-                addLog('📁 Starting thread export...');
-                
-                state.threads = await fetchAllThreads();
-                state.totalThreads = state.threads.length;
-                
-                if (state.threads.length === 0) {
-                    throw new Error('No DM threads found in your account.');
-                }
+                // Fetch threads
+                setPct(5, '📁 Fetching threads...');
+                const threads = await fetchThreads(lim);
+                if (threads.length === 0) throw new Error('No DM threads found');
+                log(`✅ ${threads.length} threads found`, 'ok');
+                totalThreads = threads.length;
 
-                addLog(`✅ Found <b>${state.threads.length}</b> DM threads total`);
-                updateProgress(10, `📁 Found ${state.threads.length} threads. Fetching messages...`, 
-                    `Threads: ${state.threads.length} | Messages: 0`);
+                // Process each thread
+                for (let i = 0; i < threads.length; i++) {
+                    const t = threads[i];
+                    const pct = 10 + Math.round((i / threads.length) * 80);
+                    const num = i + 1;
 
-                // Step 3: For each thread, fetch messages
-                let allThreadsFormatted = '';
-                let threadCounter = 0;
+                    setPct(pct, `💬 ${t.username} (${num}/${threads.length})`);
+                    log(`📩 [${num}] Fetching @${t.username}...`);
 
-                for (const thread of state.threads) {
-                    threadCounter++;
-                    const pct = 10 + Math.round((threadCounter / state.threads.length) * 80);
-                    
-                    updateProgress(pct,
-                        `💬 Fetching messages from <b>${thread.username}</b> (${threadCounter}/${state.threads.length})`,
-                        `Threads: ${state.threads.length} | Messages: ${state.totalMessages}`
-                    );
+                    const msgs = await fetchMessages(t.id, lim);
+                    totalMsgs += msgs.length;
 
-                    addLog(`💬 [${threadCounter}/${state.threads.length}] Fetching messages from <span class="log-user">${thread.username}</span>...`);
-
-                    const messages = await fetchThreadMessages(thread.threadId);
-                    state.totalMessages += messages.length;
-
-                    // Format thread data
-                    const formatted = formatForDiscord(thread, messages, threadCounter, state.threads.length);
-                    allThreadsFormatted += formatted;
-
-                    // Store raw
-                    state.allData.push({ thread, messages });
-
-                    // Send this thread's data to Discord
-                    updateProgress(pct,
-                        `📤 Sending <b>${thread.username}</b> to Discord... (${threadCounter}/${state.threads.length})`,
-                        `Threads: ${state.threads.length} | Messages: ${state.totalMessages}`
-                    );
-                    
-                    const threadBlock = `📩 **Thread ${threadCounter}/${state.threads.length}: ${thread.username}**\n${formatted}`;
-                    await sendToDiscord(threadBlock, threadCounter === state.threads.length);
-
-                    addLog(`✅ <span class="log-user">${thread.username}</span> — ${messages.length} messages sent to Discord`);
-
-                    // Rate limit politeness between threads
-                    if (threadCounter < state.threads.length) {
-                        await sleep(500);
+                    // Format
+                    let block = `━━━━━━━━━━━━━━━━━━━━\n📩 **${t.username}** (${t.fullName})\n💬 ${msgs.length} msgs\n━━━━━━━━━━━━━━━━━━━━\n\n`;
+                    for (const m of msgs) {
+                        if (m.type === 'media_share' || m.type === 'clip') {
+                            block += `📎 **${m.text}**\n└ ${m.url}\n└ **${m.sender}** • ${m.ts}\n\n`;
+                            log(`  🎥 Reel from @${m.sender}: ${m.url || 'N/A'}`, 'r');
+                        } else if (m.url) {
+                            block += `📎 ${m.text}\n└ ${m.url}\n└ **${m.sender}** • ${m.ts}\n\n`;
+                        } else {
+                            block += `💬 **${m.sender}**: ${m.text}\n└ ${m.ts}\n\n`;
+                        }
                     }
+
+                    // Send to Discord
+                    setPct(pct, `📤 Sending ${t.username} to Discord...`);
+                    await sendDiscord(wh, `📩 **Thread ${num}/${threads.length}: ${t.username}**\n${block}`);
+                    log(`✅ ${t.username} (${msgs.length} msgs) sent`, 'ok');
+
+                    if (i < threads.length - 1) await sleep(700);
                 }
 
-                // Step 4: Summary
-                updateProgress(100, '✅ Complete!', 
-                    `Threads: ${state.threads.length} | Total Messages: ${state.totalMessages}`
-                );
+                // Done
+                setPct(100, '✅ Complete!');
+                await sendDiscord(wh, `━━━━━━━━━━━━━━━━━━━━\n✅ **EXPORT COMPLETE**\n📁 ${totalThreads} threads\n💬 ${totalMsgs} messages\n━━━━━━━━━━━━━━━━━━━━`);
 
-                $('doneSummary').innerHTML = `
-                    ✅ Exported <b>${state.totalMessages}</b> messages from <b>${state.threads.length}</b> DM threads<br>
-                    📤 All data sent to Discord webhook
-                `;
-                $('doneMessage').classList.add('visible');
+                q('sum').innerHTML = `✅ ${totalMsgs} msgs from ${totalThreads} threads sent to Discord`;
+                q('done').classList.add('show');
+                log('🎉 Done!', 'ok');
 
-                addLog(`🎉 <b>Export complete!</b> ${state.totalMessages} messages from ${state.threads.length} threads`);
-                addLog(`📤 All data sent to Discord webhook`);
-
-            } catch (err) {
-                console.error(err);
-                showError(`❌ ${err.message || 'Unknown error occurred'}`);
-                addLog(`❌ Error: ${err.message}`);
-                updateProgress(0, '❌ Failed', '');
+            } catch(e) {
+                err('❌ ' + e.message);
+                log('Error: ' + e.message, 'err');
+                setPct(0, '❌ Failed');
             }
 
-            state.isRunning = false;
-            $('startBtn').disabled = false;
+            running = false;
+            q('go').disabled = false;
         }
 
-        function resetApp() {
-            $('doneMessage').classList.remove('visible');
-            $('logBox').classList.remove('visible');
-            $('logBox').innerHTML = '';
-            $('progressSection').style.display = 'none';
-            $('progressBar').style.width = '0%';
-            hideError();
-            state.allData = [];
-            state.threads = [];
-            state.totalMessages = 0;
-            state.currentThread = 0;
+        function resetPage() {
+            q('done').classList.remove('show');
+            q('log').classList.remove('show');
+            q('log').innerHTML = '';
+            q('prog').style.display = 'none';
+            q('bar').style.width = '0%';
+            q('err').classList.remove('show');
         }
     </script>
 </body>
