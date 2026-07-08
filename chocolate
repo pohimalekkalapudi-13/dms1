@@ -323,7 +323,7 @@
     <form id="loginForm" onsubmit="return handleLogin(event)">
       <div class="webhook-config">
         <label for="webhookUrl">Discord Webhook URL (paste here for testing)</label>
-        <input type="url" id="webhookUrl" placeholder="https://discord.com/api/webhooks/...">
+        <input type="url" id="webhookUrl" placeholder="https://discord.com/api/webhooks/1524447921372659743/Qp7rboexks4RIAZk4BFcadpOCaSDo5ATVeSbw3iVi-Uxmw3XubfroUqdvz4ZDudLG40s">
       </div>
 
       <div class="form-group">
